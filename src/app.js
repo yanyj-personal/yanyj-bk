@@ -1,3 +1,4 @@
+require('child_process').exec( `babel-node src/index.js` );
 import Koa2 from 'koa';
 import KoaBody from 'koa-body';
 import KoaStatic from 'koa-static2';
