@@ -55,8 +55,10 @@ let updateProfitPartById = async ctx => {
   }
 
   updateProfit.extractAmount = MathUtil.getSum(updateProfit.extractRecords, 'amount');
+  console.log(updateProfit.extractRecords);
 
   updateProfit.occupancy = MathUtil.getRatio(updateProfit.extractAmount / updateProfit.principal);
+
   await ticketProfit.updateById(ctx.params.id, updateProfit).then(_message => {
     ctx.body = successMessage(_message);
   }).catch(error => {
@@ -80,4 +82,5 @@ export let apis = [
   [ 'put', '/ticket/profit/:id', updateProfitById ],
   [ 'patch', '/ticket/profit/:id', updateProfitPartById ],
   [ 'delete', '/ticket/profit/:id', deleteProfitById ],
+  [ 'options', '/ticket/profit/:id', findAllProfit ],
 ];
