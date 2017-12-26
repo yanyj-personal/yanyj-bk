@@ -1,7 +1,7 @@
 module.exports = {
   apps: [{
     name: 'RESRful API Server',
-    script: './index.js',
+    script: './dist/app.js',
     watch: false, // 默认关闭watch 可替换为 ['src']
     ignore_watch: ['node_modules', 'build', 'logs'],
     out_file: '/logs/out.log', // 日志输出
@@ -13,6 +13,5 @@ module.exports = {
     exec_mode: 'cluster', // 开启多线程模式，用于负载均衡
     instances: 'max', // 启用多少个实例，可用于负载均衡
     autorestart: true, // 程序崩溃后自动重启
-    exec_interpreter: 'babel-node'
   }]
 };
