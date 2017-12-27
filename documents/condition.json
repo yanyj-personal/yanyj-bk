@@ -1,0 +1,9 @@
+{
+  "$lt":	"小于 value",
+  "$lte":	"小于等于 value",
+  "$gt":	"大于 value",
+  "$gte":	"大于等于 value",
+  "$ne":	"不等于 value",
+  "$in":	"等于SQL in 数组[]",
+  "$nin":	"in相反 数组[]"
+}

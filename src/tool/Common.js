@@ -1,6 +1,7 @@
 import {
   SystemConfig
 } from '../config';
+import Decimal from 'decimal';
 
 // 截取字符串，多余的部分用...代替
 export let setString = (str, len) => {
@@ -125,4 +126,43 @@ export let MathUtil = {
 
     return sum;
   }
+};
+
+export let generateCondition = (condition) => {
+  let _condition = {};
+  let _array, _key, _value;
+  for (let key in condition) {
+    if (condition[key].indexOf(':') !== -1) {
+      _array = condition[key].split(':');
+      _key = _array[0];
+      _value = _array[1];
+      _condition[key][_key] = _value;
+    } else {
+      _condition[key] = condition[key];
+    }
+  }
+  return _condition;
+};
+
+export let getAnalysis = (type, docs) => {
+  switch (type) {
+    case 'month':
+      return getMonthAnalysis(docs);
+    default:
+      return {};
+  }
+};
+
+let getMonthAnalysis = (docs) => {
+  let amount = Decimal(0.0);
+  let profit = Decimal(0.0);
+  for (let i = 0; i < docs.length; i++) {
+    profit = profit.add(Decimal(docs[i].extractAmount));
+    amount = amount.add(Decimal(docs[i].principal));
+  }
+  profit = profit.sub(amount);
+  return {
+    amount: amount.toNumber(),
+    profit: profit.toNumber()
+  };
 };

@@ -11,8 +11,8 @@ export let save = (ticketProfit = {time: new Date(), amount: 0.0}) => {
   });
 };
 
-export let findAll = () => {
-  return TicketProfit.find({deleteFlag: false}, (error, docs) => {
+export let findAll = (condition) => {
+  return TicketProfit.find({...condition, deleteFlag: false}, (error, docs) => {
     if (error) return errorMessage(error);
     return successMessage(docs);
   });
