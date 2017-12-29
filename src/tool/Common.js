@@ -166,3 +166,21 @@ let getMonthAnalysis = (docs) => {
     profit: profit.toNumber()
   };
 };
+
+export let getChartDataByAggregate = (array) => {
+  let data = [];
+  let sum = Decimal(0.0);
+  for (let item of array) {
+    let profit = Decimal(item.totalExtarctAmount).sub(Decimal(item.totalPrincipal));
+    sum = sum.add(profit);
+    data.push({
+      x: item._id,
+      y: profit.toNumber(),
+    });
+  }
+  return {
+    data,
+    amount: sum.toNumber(),
+    average: sum.div(Decimal(array.length)).toNumber()
+  };
+};

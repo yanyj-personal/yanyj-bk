@@ -20,6 +20,6 @@ router
 //
 // router['get']('/test/:name', controllers.test.Get);
 // // router['post']('/ticket/profits', controllers.ticket.profit.addNewProfit);
-addRouters(router, controllers, ['ticket.profit', 'ticket.analysis']);
+addRouters(router, controllers, ['ticket.profit', 'ticket.analysis', 'account']);
 
 module.exports = router;

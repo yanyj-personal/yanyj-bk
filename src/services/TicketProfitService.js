@@ -33,3 +33,29 @@ export let updateById = async (id, profit) => {
     return successMessage([docs]);
   });
 };
+
+export let aggretate = async (condition) => {
+  return TicketProfit.aggregate([{
+    $match: {
+      deleteFlag: false,
+      time: {$lte: condition.endYear, $gte: condition.startYear}
+    },
+
+  }, {
+    $project: {
+      time: {$substr: ['$time', 0, condition.type]},
+      principal: '$principal',
+      extractAmount: '$extractAmount',
+    }
+  },
+  {
+    $group: {
+      _id: '$time', // 将_id设置为day数据
+      totalPrincipal: { $sum: '$principal' },
+      totalExtarctAmount: { $sum: '$extractAmount' }
+    }
+  },
+  {
+    $sort: {'_id': 1}
+  }]);
+};
