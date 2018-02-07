@@ -2,6 +2,7 @@ import {
   SystemConfig
 } from '../config';
 import Decimal from 'decimal';
+import fetch from 'node-fetch';
 
 // 截取字符串，多余的部分用...代替
 export let setString = (str, len) => {
@@ -183,4 +184,26 @@ export let getChartDataByAggregate = (array) => {
     amount: sum.toNumber(),
     average: sum.div(Decimal(array.length)).toNumber()
   };
+};
+
+export let getPage = (url) => fetch(url).then((res) => res.text());
+
+export let getString = code => {
+	var formatCode = code.replace(/&#/g, '0').split(';').map((value) => {
+		value = value.trim();
+		var index = value.trim().indexOf('0x');
+		if(index !== 0 && index !== -1) {
+			return value.split('0x').map((value1, index) => {
+
+				if(index !== 0) {
+					return String.fromCharCode(`0x${value1}`)
+				} else {
+					return value1;
+				}
+			}).join('')
+		} else {
+			return String.fromCharCode(value)
+		}
+	}).join('');
+	return formatCode.substr(0, formatCode.length - 1);
 };

@@ -11,6 +11,7 @@ import MainRoutes from './routes/main-routes';
 import ErrorRoutesCatch from './middleware/ErrorRoutesCatch';
 import ErrorRoutes from './routes/error-routes';
 import mongoose from 'mongoose';
+let task = require('./task/index');
 
 // import jwt from 'koa-jwt';
 // import fs from 'fs';
@@ -73,7 +74,7 @@ if (env === 'development') { // logger
 }
 
 app.listen(SystemConfig.API_server_port);
-
+task();
 console.log('Now start API server on port ' + SystemConfig.API_server_port + '...');
 
 export default app;
