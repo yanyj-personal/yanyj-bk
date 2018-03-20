@@ -8,7 +8,6 @@ router
   .get('/public/get', function (ctx, next) {
     ctx.body = '禁止访问！';
   }) // 以/public开头则不用经过权限认证
-  .all('/upload', controllers.upload.default)
   .options('*', (ctx, next) => {
     ctx.body = 'GET, POST, PUT, PATCH, DELETE';
   });
@@ -20,6 +19,17 @@ router
 //
 // router['get']('/test/:name', controllers.test.Get);
 // // router['post']('/ticket/profits', controllers.ticket.profit.addNewProfit);
-addRouters(router, controllers, ['ticket.profit', 'ticket.analysis', 'account']);
 
+let keys = [];
+for(let key in controllers) {
+	if(!controllers[key].hasOwnProperty('apis')) {
+		for(let ky in controllers[key]) {
+			keys.push(`${key}.${ky}`);
+		}
+	} else {
+		keys.push(key);
+	}
+}
+console.log(keys);
+addRouters(router, controllers, ['ticket.profit', 'ticket.analysis', 'account', 'ticket.match', 'test']);
 module.exports = router;

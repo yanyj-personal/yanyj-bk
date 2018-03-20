@@ -3,17 +3,17 @@ const Schema = mongoose.Schema;
 
 const Loans = new Schema({
 
-  loansAmount: { // 金额
+  loansAmount: { // 贷款金额
     type: Number,
     require: true
   },
-  loansOrg: {
-    type: Number,
+  loansOrg: { //贷款机构
+    type: String,
     require: true
   },
 
-  time: {
-    type: String,
+  time: { // 贷款日期
+    type: String,  //
     // unique: true,
     require: true
   },
